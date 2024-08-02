@@ -13,7 +13,7 @@ export const getMulterOptions = (relativePath: string = '') => ({
 
             let incrementalPath = storagePath
 
-            if(!existsSync(storagePath + relativePath.replace(',', '/'))) {
+            if(!existsSync(storagePath + relativePath.toString().replace(',', '/'))) {
                 splittedRelativePath.forEach((folder) => {
                     if(!existsSync(incrementalPath + folder)) {
                         mkdirSync(incrementalPath + folder)
@@ -22,7 +22,7 @@ export const getMulterOptions = (relativePath: string = '') => ({
                     incrementalPath += folder + '/'
                 })
             } else {
-                incrementalPath += relativePath.replace(',', '/')
+                incrementalPath += relativePath.toString().replace(',', '/')
             }
             cb(null, incrementalPath)
         },
