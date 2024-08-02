@@ -22,11 +22,13 @@ let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
         this.availableFields = [
+            'login',
+            'email',
+            'phone',
             'nameFirst',
             'nameLast',
-            'email',
-            'gender',
             'birthDate',
+            'gender',
         ];
     }
     filterFields(body) {
@@ -52,10 +54,18 @@ let UserService = class UserService {
             select: this.availableFields
         });
     }
-    async getUserData(id) {
+    async getUserById(id) {
         return await this.userRepository.findOne({
             where: { id },
             select: this.availableFields
+        });
+    }
+    async getUserByLoginOrEmail(loginOrEmail) {
+        return await this.userRepository.findOne({
+            where: [
+                { login: loginOrEmail },
+                { email: loginOrEmail }
+            ]
         });
     }
     async updateUserData(id, body) {

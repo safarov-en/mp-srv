@@ -1,15 +1,30 @@
-import { Response, Request } from 'express';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import { LoginUserDto } from './dto/loginUser.dto';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    getAllUsers(res: Response, account: string): Promise<{
+    getAllUsers(): Promise<{
         status: string;
         data: import("./user.entity").User[];
     }>;
-    getUser(id: number, res: Response): Promise<Response<any, Record<string, any>>>;
-    createUser(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
-    updateUser(id: number, body: UpdateUserDto, res: Response): Promise<Response<any, Record<string, any>>>;
-    deleteUser(id: number, res: Response): Promise<Response<any, Record<string, any>>>;
+    getUser(id: number): Promise<{
+        status: string;
+        data: import("./user.entity").User;
+    }>;
+    login(body: LoginUserDto): Promise<{
+        status: string;
+        data: any;
+    }>;
+    register(body: LoginUserDto): Promise<{
+        status: string;
+        data: any;
+    }>;
+    updateUser(id: number, body: UpdateUserDto): Promise<{
+        status: string;
+        data: any;
+    }>;
+    deleteUser(id: number): Promise<{
+        status: string;
+    }>;
 }

@@ -20,9 +20,17 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ name: 'login', type: 'varchar' }),
+    __metadata("design:type", String)
+], User.prototype, "login", void 0);
+__decorate([
     (0, typeorm_1.Column)({ name: 'email', type: 'varchar' }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ name: 'phone', type: 'varchar' }),
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
 __decorate([
     (0, typeorm_1.Column)({ name: 'password', type: 'varchar' }),
     __metadata("design:type", String)
