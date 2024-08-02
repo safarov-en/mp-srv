@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const config_module_1 = require("./config.module");
 const typeorm_module_1 = require("./db/typeorm.module");
 const user_module_1 = require("./entities/user/user.module");
+const product_module_1 = require("./entities/product/product.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -20,6 +21,7 @@ exports.AppModule = AppModule = __decorate([
             config_module_1.ConfigModule,
             typeorm_module_1.TypeOrmModule,
             user_module_1.UserModule,
+            product_module_1.ProductModule
         ],
     })
 ], AppModule);

@@ -21,7 +21,6 @@ export class UserService {
     'birthDate',
   ]
 
-  // Filter body's fileds from available fields list
   private filterFields(body: { [k: string]: any }) {
     const filteredBody: { [k: string]: any } = {}
 
@@ -34,7 +33,6 @@ export class UserService {
     return filteredBody
   }
 
-  // Register new user
   public async createUser(userData: any) {
     const salt = await genSalt(10)
 
@@ -48,14 +46,12 @@ export class UserService {
     return await this.userRepository.save(newUser)
   }
 
-  // Get all users
   public async getAllUsers() {
     return await this.userRepository.find({
       select: this.availableFields as any
     })
   }
 
-  // Get user data by id
   public async getUserData(id: number) {
     return await this.userRepository.findOne({
       where: { id },
@@ -63,7 +59,6 @@ export class UserService {
     })
   }
 
-  // Update user data whole
   public async updateUserData(id: number, body: UpdateUserDto) {
     return await this.userRepository.update(
       { id },
@@ -71,7 +66,6 @@ export class UserService {
     )
   }
 
-  // Delete user by id
   public async deleteUser(id: number) {
     return await this.userRepository.delete(id)
   }
