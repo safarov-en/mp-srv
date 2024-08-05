@@ -3,6 +3,7 @@ import {
   Param, ParseIntPipe, Body, HttpCode, HttpStatus
 } from '@nestjs/common'
 import {compore} from 'bcrypt'
+import { JwtService } from '@nestjs/jwt'
 
 import { ForbiddenException } from '@helpers/exceptions'
 import { UserService } from './user.service'
@@ -14,6 +15,7 @@ import { RegisterUserDto } from './dto/registerUser.dto'
 export class UserController {
   constructor(
     private readonly userService: UserService,
+    private readonly jwtService: JwtService
   ) {}
 
   @Get('/')
@@ -38,7 +40,16 @@ export class UserController {
     if(!foundUser) throw new ForbiddenException()
     const isPasswordMatch = await compore(password, foundUser.password)
     if(!isPasswordMatch) throw new ForbiddenException()
-    return {status: 'ok', data: null}
+    const jwt = this.jwtService.sign(
+      {x:1},
+      {secret: 'lajksdbkasdf'}
+    )
+    return {
+      status: 'ok',
+      data: {
+        accessToken: jwt
+      }
+    }
   }
 
   @Post('/register')
