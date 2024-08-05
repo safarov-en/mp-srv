@@ -36,7 +36,7 @@ export class UserService {
     return filteredBody
   }
 
-  public async createUser(userData: RegisterUserDto) {
+  async createUser(userData: RegisterUserDto) {
     const salt = await genSalt(10)
 
     const hashedPassword = await hash(userData.password, salt)
@@ -49,20 +49,20 @@ export class UserService {
     return await this.userRepository.save(newUser)
   }
 
-  public async getAllUsers() {
+  async getAllUsers() {
     return await this.userRepository.find({
       select: this.availableFields as any
     })
   }
 
-  public async getUserById(id: number) {
+  async getUserById(id: number) {
     return await this.userRepository.findOne({
       where: { id },
       select: this.availableFields as any
     })
   }
 
-  public async getUserByLoginOrEmail(loginOrEmail: string) {
+  async getUserByLoginOrEmail(loginOrEmail: string) {
     return await this.userRepository.findOne({
       where: [
         {login: loginOrEmail},
@@ -71,14 +71,14 @@ export class UserService {
     })
   }
 
-  public async updateUserData(id: number, body: UpdateUserDto) {
+  async updateUserData(id: number, body: UpdateUserDto) {
     return await this.userRepository.update(
       { id },
       this.filterFields(body)
     )
   }
 
-  public async deleteUser(id: number) {
+  async deleteUser(id: number) {
     return await this.userRepository.delete(id)
   }
 }
